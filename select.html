@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <h2 class="text-center text-white bg-primary py-2">Food Invoice</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <!---------------- lunch menu ------------ -->
+
+
+            <div class="col-3 col-sm-6">
+                <div class="form-group">
+                    <label for="lunch" class="label text-center py-2 text-white bg-black d-block">Lunch</label>
+                    <select name="" id="lunch" class="form-control">
+        
+                    </select>
+                </div>
+            </div>
+            <!----------------end lunch menu ------------ -->
+
+
+
+            <!----------------start Dinner menu ------------ -->
+            <div class="col-3 col-sm-6">
+                <div class="form-group">
+                    <label for="sl" class="label text-center py-2 text-white bg-black d-block">Dinner</label>
+
+                    <select name="" id="dinner" class="form-control">
+        
+                    </select>
+                </div>
+            </div>
+            <!---------------- end dinner menu ------------ -->
+
+            <!----------------Desert menu ------------ -->
+
+
+            <!-- <div class="col-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="drink" id="dr1" value="coke" checked>
+                    <label class="form-check-label" for="dr1">
+                      Coke
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="drink" id="dr2" value="Pepsi">
+                    <label class="form-check-label" for="dr2">
+                      Pepsi
+                    </label>
+                </div>
+
+            </div> -->
+
+
+            <!---------------- end Desert menu ------------ -->
+
+
+        </div>
+    </div>
+
+    <!----------------Button------------ -->
+    <div class="container">
+        <div class="col-6 m-auto mt-3 b">
+            <button class="btn btn-success d-block ms-auto px-4" id="btn">Total</button>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="col-6 me-auto">
+            <ul class="list-group" id="list">
+
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table w-25">
+            <tr>
+
+                <th>Total:-</th>
+                <th id="totalamount"></th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Start script> -->
+    <script>
+        // -------------lunch menu---------
+
+        var lunch = document.getElementById('lunch')
+        var lunchmenu = [{
+            lname: "chiken korma",
+            price: 300
+        }, {
+            lname: "Chiken Masala",
+            price: 200
+        }, {
+            lname: "Mutton Masala",
+            price: 500
+        }, {
+            lname: "Mutton korma",
+            price: 600
+        }, {
+            lname: "Paneer",
+            lrice: 200
+        }, {
+            lname: "Mix Veg",
+            price: 100
+        }, {
+            lname: "Dal",
+            price: 100
+        }, {
+            lname: "Rice",
+            price: 50
+        }, {
+            lname: "Roti",
+            price: 10
+        }, ]
+        var lm = "";
+        lunchmenu.forEach(function(lmen) {
+            lm += `<option value="${lmen.price}">${lmen.lname}</option>`
+        })
+        lunch.innerHTML = lm
+
+        var larr = []
+        lunch.onchange = function() {
+                var lval = parseInt(this.value)
+                larr.push(lval)
+
+            }
+            // --------------lunch menu end--------------//
+
+
+
+        //---------------dinner menu----------------//
+
+        var dinner = document.getElementById('dinner')
+        var dinnermenu = [{
+            dname: "Dinner chi korma",
+            price: 300
+        }, {
+            dname: "Dinner Chi Masala",
+            price: 200
+        }, {
+            dname: "Dinner Mut Masala",
+            price: 500
+        }, {
+            dname: "Dinner Mut korma",
+            price: 600
+        }, {
+            dname: "Dinner Paneer",
+            price: 200
+        }, {
+            dname: "Dinner Mix Veg",
+            price: 100
+        }, {
+            dname: "Dinner Dal",
+            price: 100
+        }, {
+            dname: "Rice",
+            price: 50
+        }, {
+            dname: "Roti",
+            price: 10
+        }, ]
+        var dm = "";
+        dinnermenu.forEach(function(dmen) {
+            dm += `<option value="${dmen.price}">${dmen.dname}</option>`
+        })
+        dinner.innerHTML = dm
+
+        var darr = []
+
+        dinner.onchange = function() {
+                var dval = parseInt(this.value)
+
+                darr.push(dval)
+
+
+            }
+            //-----------------dinner menu end---------------//
+
+
+        //--------------- desert menu------------------//
+
+        document.getElementById("btn").onclick = function() {
+            var finalarr = larr.concat(darr);
+            tlist = "";
+            totalam = null;
+            finalarr.forEach(function(tot) {
+                tlist += `  <li class="list-group-item">${tot}</li>`
+                totalam += tot
+            })
+            document.getElementById("list").innerHTML = tlist
+            document.getElementById("totalamount").innerHTML = totalam
+        }
+    </script>
+</body>
+
+</html>

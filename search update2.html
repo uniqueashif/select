@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+</head>
+
+<body>
+
+    <h2 class="text-center text-white bg-primary py-2">Food Invoice</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <!---------------- lunch menu ------------ -->
+
+
+            <div class=" col-sm-6 col-md-3 col-lg-3">
+                <div class="form-group">
+                    <label for="lunch" class="label text-center py-2 text-white bg-black d-block">Lunch</label>
+                    <select name="" id="lunch" class="form-control">
+        
+                    </select>
+                </div>
+            </div>
+            <!----------------end lunch menu ------------ -->
+
+
+
+            <!----------------start Dinner menu ------------ -->
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="form-group">
+                    <label for="dinner" class="label text-center py-2 text-white bg-black d-block">Dinner</label>
+
+                    <select name="" id="dinner" class="form-control">
+        
+                    </select>
+                </div>
+            </div>
+            <!---------------- end dinner menu ------------ -->
+        </div>
+    </div>
+
+    <!----------------Button------------ -->
+    <div class="container">
+        <div class="mt-3 text-center">
+            <button class="btn btn-success  ms-auto px-4" id="btn">Total</button>
+            <button class="btn btn-success    ms-auto px-4" id="clear">clear</button>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="col-6 me-auto">
+            <table class="table">
+                <tbody>
+                    <tr id="dname">
+
+                    </tr>
+                    <tr id="dval">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table w-25">
+            <tr>
+                <th>Total:-</th>
+                <th id="totalamount"></th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Start script> -->
+    <script>
+        // -------------lunch menu---------
+
+        var lunch = document.getElementById('lunch')
+        var lunchmenu = [{
+            lname: "chiken korma",
+            price: 80
+        }, {
+            lname: "Chiken Masala",
+            price: 100
+        }, {
+            lname: "Chicken Biryani",
+            price: 100
+        }, {
+            lname: "Chicken Tikka",
+            price: 60
+        }, {
+            lname: "Chicken Lolipop",
+            price: 120
+        }, {
+            lname: "Mix Veg",
+            price: 50
+        }, {
+            lname: "Tadka Dal",
+            price: 30
+        }, {
+            lname: "Rice",
+            price: 50
+        }, {
+            lname: "Roti",
+            price: 10
+        }, ]
+        var lm = "";
+        lunchmenu.forEach(function(lmen) {
+            lm += `<option value="${lmen.price}">${lmen.lname}</option>`
+        })
+        lunch.innerHTML = lm
+        var ltval = [];
+        var larr = []
+        lunch.onchange = function() {
+                var lval = parseInt(this.value)
+                var ltext = this.options[this.selectedIndex].text;
+                larr.push(lval)
+                ltval.push(ltext)
+
+            }
+            // --------------lunch menu end--------------//
+
+
+
+        //---------------dinner menu----------------//
+
+        var dinner = document.getElementById('dinner')
+        var dinnermenu = [{
+            dname: "Mutton korma",
+            price: 300
+        }, {
+            dname: "Mutton Masala",
+            price: 300
+        }, {
+            dname: "Mutton Gravy",
+            price: 500
+        }, {
+            dname: "Mutton Biryani",
+            price: 250
+        }, {
+            dname: "Veg Biryani",
+            price: 80
+        }, {
+            dname: " Veg kabab",
+            price: 100
+        }, {
+            dname: " Dal Makhani",
+            price: 100
+        }, {
+            dname: "Rice",
+            price: 50
+        }, {
+            dname: "Roti",
+            price: 10
+        }, ]
+        var dm = "";
+        dinnermenu.forEach(function(dmen) {
+            dm += `<option value="${dmen.price}">${dmen.dname}</option>`
+        })
+        dinner.innerHTML = dm
+
+        var darr = []
+        var dtval = []
+        dinner.onchange = function() {
+                var dval = parseInt(this.value)
+                var dtext = this.options[this.selectedIndex].text;
+                dtval.push(dtext)
+                darr.push(dval)
+
+
+            }
+            //-----------------dinner menu end---------------//
+
+
+        //--------------- desert menu------------------//
+
+        document.getElementById("btn").onclick = function() {
+            var finalarr = larr.concat(darr);
+            var finaltext = ltval.concat(dtval)
+                // var lastarr = finaltext.concat(finalarr)
+            tlist = "";
+            tval = "";
+            totalam = null;
+            finaltext.forEach(function(textot) {
+                tlist += `  <th>${textot}</th>`
+
+            })
+            finalarr.forEach(function(valtot) {
+                tval += `  <th>${valtot}</th>`
+                totalam += valtot
+            })
+
+            document.getElementById("dname").innerHTML = tlist
+            document.getElementById("dval").innerHTML = tval
+            document.getElementById("totalamount").innerHTML = totalam
+        }
+
+        document.getElementById("clear").onclick = function() {
+            darr.length = 0
+            dtval.length = 0
+            larr.length = 0
+            ltval.length = 0
+            document.getElementById("dname").innerHTML = ""
+            document.getElementById("dval").innerHTML = ""
+            document.getElementById("totalamount").innerHTML = ""
+
+        }
+    </script>
+</body>
+
+</html>
